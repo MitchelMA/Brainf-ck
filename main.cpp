@@ -82,14 +82,14 @@ void readAsFile(char *input)
         myfile >> ch;
         program += ch;
     }
+    // close the file
+    myfile.close();
+
     // remove last character of the string, since using this technique ^ adds the last character twice
     program.pop_back();
 
     // start the programloop
     programLoop();
-
-    // close the file
-    myfile.close();
 }
 
 void readAsString(char *input)
@@ -99,8 +99,10 @@ void readAsString(char *input)
         cout << "geen argument doorgegeven";
         exit(1);
     }
+    // set the program string as the input
     program = input;
 
+    /// start the program loop
     programLoop();
 }
 
