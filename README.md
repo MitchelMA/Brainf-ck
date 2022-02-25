@@ -12,3 +12,17 @@ Een programma dat input pakt, dit uitprint + het ASCII nummer op een (n)*ewline*
 ```bf
 ,.n'
 ```
+## Gebruik
+Je kan het programma gebruiken op de volgende manieren:  
+Als je een bestand wilt uitlezen:
+```terminal
+> main f "path-to-file"
+```
+Als je rechtstreeks wilt uitlezen:
+```terminal
+> main s "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>."
+```
+Of gewoon zoals voorheen. De "f" kan gewoon weg worden gelaten en dan gaat het programma er van uit dat je een bestand wilt lezen
+```terminal
+> main "path-to-tile"
+```
