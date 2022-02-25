@@ -39,14 +39,13 @@ int main(int argc, char **argv)
     // program can continue after checking
 
     char ch;
-    while (1)
+    while (!myfile.eof())
     {
         myfile >> ch;
-        if (myfile.eof())
-            break;
-        if (ch != 0)
-            program += ch;
+        program += ch;
     }
+    // remove last character of the string, since using this technique ^ adds the last character twice
+    program.pop_back();
 
     // start the programloop
     programLoop();
