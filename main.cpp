@@ -8,7 +8,7 @@ using namespace std;
 int slotIndex = 0;
 string program;
 int programIndex = 0;
-ifstream myfile;
+
 int loopDepth = 0;
 
 // slot-array
@@ -16,6 +16,8 @@ vector<char> *slots = new vector<char>;
 
 // prototypes
 void programLoop();
+void readAsFile(char *input);
+void readAsString(char *input);
 
 int main(int argc, char **argv)
 {
@@ -25,19 +27,55 @@ int main(int argc, char **argv)
     // error checking
     if (!(argc > 1))
     {
-        cout << "geen bestand doorgegeven";
+        cout << "Niet genoeg informatie doorgegeven";
         exit(1);
     }
-    // open the file
-    myfile.open(*(argv + 1), ios::in);
-    if (!myfile.is_open())
+
+    switch (**(argv + 1))
     {
-        cout << "kan bestand niet lezen";
+    // read as file
+    case 'f':
+    case 'F':
+    {
+        readAsFile(*(argv + 2));
+    }
+    break;
+    case 's':
+    case 'S':
+    {
+        readAsString(*(argv + 2));
+    }
+    break;
+    default:
+    {
+        readAsFile(*(argv + 1));
+    }
+    break;
+    }
+
+    // print out the size of the vector at the end
+    cout << endl
+         << endl
+         << slots->size() << endl;
+
+    // free the vector
+    free(slots);
+
+    return 0;
+}
+
+void readAsFile(char *input)
+{
+    ifstream myfile;
+    // open the file
+    myfile.open(input, ios::in);
+    if (!(myfile.is_open()))
+    {
+        cout << "Kan bestand niet lezen";
         exit(1);
     }
 
-    // program can continue after checking
-
+    // program can continue after checking if it was even a file
     char ch;
     while (!myfile.eof())
     {
@@ -50,18 +88,20 @@ int main(int argc, char **argv)
     // start the programloop
     programLoop();
 
-    // print out the size of the vector at the end
-    cout << endl
-         << endl
-         << slots->size() << endl;
-
-    // free the vector
-    free(slots);
-
     // close the file
     myfile.close();
+}
 
-    return 0;
+void readAsString(char *input)
+{
+    if (input == 0)
+    {
+        cout << "geen argument doorgegeven";
+        exit(1);
+    }
+    program = input;
+
+    programLoop();
 }
 
 void programLoop()
